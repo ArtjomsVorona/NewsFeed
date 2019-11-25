@@ -9,16 +9,23 @@
 import Gloss
 import UIKit
 
-class NewsTableViewController: UITableViewController {
+class NewsTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     var news = [News]()
-    let newApiUrl = "https://newsapi.org/v2/top-headlines?country=lv&apiKey="
+    
+    let newsApiUrl = Api.url
     let apiKey = Api.apiKey
-
+    
+    @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
+    
+    @IBOutlet weak var newsTableView: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = "LV news"
+        title = "Top LV headlines"
+        activityIndicatorView.isHidden = true
+        activityIndicatorView.style = .large
     }
     
     //MARK: IBActions
@@ -26,12 +33,13 @@ class NewsTableViewController: UITableViewController {
     @IBAction func refreshButtonTapped(_ sender: UIBarButtonItem) {
         handleGetData()
     }
-
     
     //MARK: functions
     
     func handleGetData() {
-        let jsonUrl = newApiUrl + apiKey
+        activityIndicator(animate: true)
+        
+        let jsonUrl = newsApiUrl + apiKey
         
         guard let url = URL(string: jsonUrl) else { return }
         var urlRequest = URLRequest(url: url)
@@ -44,10 +52,11 @@ class NewsTableViewController: UITableViewController {
             
             if let error = taskError {
                 print(error.localizedDescription)
+                self.basicAlert(title: "Error!", message: error.localizedDescription)
+                self.activityIndicator(animate: false)
             }
             
             guard let data = data else {
-                print("Data error")
                 return
             }
             
@@ -66,20 +75,39 @@ class NewsTableViewController: UITableViewController {
         guard let responseDict = dict["articles"] as? [Gloss.JSON] else { return }
         
         news = [News].from(jsonArray: responseDict) ?? []
-        
+
+        self.activityIndicator(animate: false)
+    }
+    
+    func activityIndicator(animate: Bool) {
         DispatchQueue.main.async {
-            self.tableView.reloadData()
+            if animate {
+                self.newsTableView.isHidden = true
+                self.activityIndicatorView.isHidden = false
+                self.activityIndicatorView.startAnimating()
+            } else {
+                self.newsTableView.isHidden = false
+                self.activityIndicatorView.isHidden = true
+                self.activityIndicatorView.stopAnimating()
+            }
+            self.updateTableView()
         }
-        
+    }
+    
+    func updateTableView() {
+        newsTableView.reloadData()
+        if news.count > 0 {
+            newsTableView.scrollToRow(at: IndexPath.init(row: 0, section: 0), at: .top, animated: true)
+        }
     }
 
     // MARK: - Table view data source
 
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return news.count
     }
 
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "NewsCell", for: indexPath) as? NewsTableViewCell else { return UITableViewCell() }
 
         let item = news[indexPath.row]
@@ -94,7 +122,9 @@ class NewsTableViewController: UITableViewController {
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         guard let detailVC = storyboard.instantiateViewController(withIdentifier: "DetailNewsSBID") as? DetailNewsViewController else { return }
         
@@ -102,14 +132,13 @@ class NewsTableViewController: UITableViewController {
         detailVC.newsTitle = item.title
         detailVC.newsDescription = item.description
         detailVC.url = item.url
-        detailVC.urlToImage = item.urlToImage
         detailVC.newsImage = item.image
         
         navigationController?.pushViewController(detailVC, animated: true)
     }
     
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 150
     }
 
-}
+}//end class

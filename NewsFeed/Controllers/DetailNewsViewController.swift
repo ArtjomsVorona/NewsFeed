@@ -14,7 +14,6 @@ class DetailNewsViewController: UIViewController {
     var newsDescription: String = ""
     var sourceName: String = ""
     var url: String = ""
-    var urlToImage: String = ""
     var newsImage: UIImage?
     
     @IBOutlet weak var newsTitleLabel: UILabel!
@@ -24,10 +23,6 @@ class DetailNewsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         updateView()
-    }
-    
-    @IBAction func readFullArticleTapped(_ sender: UIButton) {
-        print(url)
     }
     
     func updateView() {

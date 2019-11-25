@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		963B4859238C0DB700F2AA73 /* Alert-ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963B4858238C0DB700F2AA73 /* Alert-ext.swift */; };
 		96B2B26F238BB6750096073F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96B2B26E238BB6750096073F /* AppDelegate.swift */; };
 		96B2B271238BB6750096073F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96B2B270238BB6750096073F /* SceneDelegate.swift */; };
 		96B2B276238BB6750096073F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 96B2B274238BB6750096073F /* Main.storyboard */; };
@@ -25,6 +26,7 @@
 /* Begin PBXFileReference section */
 		01EDB227A1155CC9BE6A1C0C /* Pods_NewsFeed.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NewsFeed.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		510BC5634807EC117E73B07D /* Pods-NewsFeed.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NewsFeed.release.xcconfig"; path = "Target Support Files/Pods-NewsFeed/Pods-NewsFeed.release.xcconfig"; sourceTree = "<group>"; };
+		963B4858238C0DB700F2AA73 /* Alert-ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Alert-ext.swift"; sourceTree = "<group>"; };
 		96B2B26B238BB6750096073F /* NewsFeed.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NewsFeed.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		96B2B26E238BB6750096073F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		96B2B270238BB6750096073F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -71,6 +73,14 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		963B4857238C0D8A00F2AA73 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				963B4858238C0DB700F2AA73 /* Alert-ext.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		96B2B262238BB6750096073F = {
 			isa = PBXGroup;
 			children = (
@@ -94,6 +104,7 @@
 			children = (
 				96B2B285238BB6AA0096073F /* Delegates */,
 				96B2B28E238BBF6C0096073F /* Data Manager */,
+				963B4857238C0D8A00F2AA73 /* Extensions */,
 				96B2B28A238BBA9D0096073F /* Model */,
 				96B2B287238BB7520096073F /* Controllers */,
 				96B2B286238BB6D00096073F /* Views */,
@@ -266,6 +277,7 @@
 			files = (
 				96B2B290238BBFA40096073F /* Api.swift in Sources */,
 				96B2B289238BBA660096073F /* NewsTableViewController.swift in Sources */,
+				963B4859238C0DB700F2AA73 /* Alert-ext.swift in Sources */,
 				96B2B26F238BB6750096073F /* AppDelegate.swift in Sources */,
 				96B2B279238BB6750096073F /* NewsFeed.xcdatamodeld in Sources */,
 				96B2B28D238BBB170096073F /* News.swift in Sources */,

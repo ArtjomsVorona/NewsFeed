@@ -11,4 +11,5 @@ import Foundation
 class Api {
     
     static let apiKey = "00ead118d13c4a41af7dbe9bfede174e"
+    static let url = "https://newsapi.org/v2/top-headlines?country=lv&apiKey="
 }
