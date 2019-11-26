@@ -33,6 +33,13 @@ class News: JSONDecodable {
         self.urlToImage = urlToImage
     }
     
+    init(title: String, description: String, url: String, image: UIImage?) {
+        self.title = title
+        self.description = description
+        self.url = url
+        self.image = image
+    }
+    
     private func loadImage() -> UIImage? {
         var returnImage: UIImage?
         

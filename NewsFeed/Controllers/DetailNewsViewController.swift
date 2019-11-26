@@ -12,7 +12,6 @@ class DetailNewsViewController: UIViewController {
     
     var newsTitle: String = ""
     var newsDescription: String = ""
-    var sourceName: String = ""
     var url: String = ""
     var newsImage: UIImage?
     
@@ -25,6 +24,11 @@ class DetailNewsViewController: UIViewController {
         updateView()
     }
     
+    //MARK: IBActions
+    @IBAction func savedButtonTapped(_ sender: UIButton) {
+        SavedNews.news.insert(News(title: newsTitle, description: newsDescription, url: url, image: newsImage), at: 0)
+    }
+    
     func updateView() {
         newsTitleLabel.text = newsTitle
         newsDescriptionLabel.text = newsDescription
@@ -32,8 +36,6 @@ class DetailNewsViewController: UIViewController {
     }
     
     // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let webViewVC = segue.destination as? WebViewViewController else { return }
         

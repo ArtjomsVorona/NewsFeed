@@ -23,19 +23,17 @@ class NewsTableViewController: UIViewController, UITableViewDelegate, UITableVie
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = "Top LV headlines"
+        title = "LV headlines"
         activityIndicatorView.isHidden = true
         activityIndicatorView.style = .large
     }
     
     //MARK: IBActions
-    
     @IBAction func refreshButtonTapped(_ sender: UIBarButtonItem) {
         handleGetData()
     }
     
     //MARK: functions
-    
     func handleGetData() {
         activityIndicator(animate: true)
         
@@ -102,7 +100,6 @@ class NewsTableViewController: UIViewController, UITableViewDelegate, UITableVie
     }
 
     // MARK: - Table view data source
-
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return news.count
     }
@@ -138,7 +135,7 @@ class NewsTableViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 150
+        return 120
     }
 
 }//end class
