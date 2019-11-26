@@ -91,6 +91,7 @@ class SavedNewsTableViewController: UITableViewController {
     
     // MARK: - Navigation
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         
         guard let webViewVC = storyboard.instantiateViewController(withIdentifier: "WebViewSBID") as? WebViewViewController else { return }
