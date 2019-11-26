@@ -33,6 +33,7 @@ class WebViewViewController: UIViewController, WKNavigationDelegate {
         
         activityIndicator = UIActivityIndicatorView()
         view = activityIndicator
+        view.backgroundColor = .systemBackground
     }
 
     func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
