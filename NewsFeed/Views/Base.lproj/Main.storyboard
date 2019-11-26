@@ -223,20 +223,20 @@
                                 </wkWebViewConfiguration>
                             </wkWebView>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="ou8-rH-Qse">
-                                <rect key="frame" x="179.5" y="376" width="55" height="56"/>
+                                <rect key="frame" x="153.5" y="351" width="107" height="106"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="55" id="Vvh-DT-wna"/>
-                                    <constraint firstAttribute="height" constant="56" id="yFm-NG-Nu9"/>
+                                    <constraint firstAttribute="height" constant="106" id="dab-c3-KAX"/>
+                                    <constraint firstAttribute="width" constant="107" id="lge-LR-UgN"/>
                                 </constraints>
                             </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="He2-5Z-3th" firstAttribute="top" secondItem="dmM-cd-7jo" secondAttribute="top" id="638-Wf-c4r"/>
+                            <constraint firstItem="ou8-rH-Qse" firstAttribute="centerX" secondItem="duv-li-IwQ" secondAttribute="centerX" id="CbC-yp-Evx"/>
                             <constraint firstAttribute="bottom" secondItem="He2-5Z-3th" secondAttribute="bottom" id="EQi-kW-kN4"/>
+                            <constraint firstItem="ou8-rH-Qse" firstAttribute="centerY" secondItem="duv-li-IwQ" secondAttribute="centerY" id="Hab-K9-8jW"/>
                             <constraint firstItem="He2-5Z-3th" firstAttribute="trailing" secondItem="duv-li-IwQ" secondAttribute="trailing" id="WwV-ml-j8F"/>
-                            <constraint firstItem="ou8-rH-Qse" firstAttribute="centerY" secondItem="duv-li-IwQ" secondAttribute="centerY" id="Zer-xs-6I5"/>
-                            <constraint firstItem="ou8-rH-Qse" firstAttribute="centerX" secondItem="duv-li-IwQ" secondAttribute="centerX" id="bxk-qz-Yxg"/>
                             <constraint firstItem="He2-5Z-3th" firstAttribute="leading" secondItem="duv-li-IwQ" secondAttribute="leading" id="h0V-vr-JEa"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="duv-li-IwQ"/>

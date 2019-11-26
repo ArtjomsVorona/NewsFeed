@@ -22,7 +22,6 @@ class WebViewViewController: UIViewController, WKNavigationDelegate {
         webView = WKWebView()
         webView.navigationDelegate = self
         view = webView
-
     }
 
     override func viewDidLoad() {
@@ -33,6 +32,7 @@ class WebViewViewController: UIViewController, WKNavigationDelegate {
         webView.allowsBackForwardNavigationGestures = true
         
         activityIndicator = UIActivityIndicatorView()
+        view = activityIndicator
     }
 
     func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
@@ -44,6 +44,7 @@ class WebViewViewController: UIViewController, WKNavigationDelegate {
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         print("Navigation stopped")
         activityIndicator.stopAnimating()
+        view = webView
     }
     
 }
