@@ -29,6 +29,10 @@ class NewsTableViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     //MARK: IBActions
+    @IBAction func infoBarButtonTapped(_ sender: Any) {
+        basicAlert(title: "Homework in Riga Coding School", message: "This is a homework project in RCS. Newsapi.org API is used.")
+    }
+    
     @IBAction func refreshButtonTapped(_ sender: UIBarButtonItem) {
         handleGetData()
     }

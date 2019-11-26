@@ -30,6 +30,11 @@ class SavedNewsTableViewController: UITableViewController {
         loadData()
     }
     
+    //MARK: IBActions
+    @IBAction func infoBarButtonTapped(_ sender: Any) {
+        basicAlert(title: "Homework in Riga Coding School", message: "This is a homework project in RCS. Newsapi.org API is used.")
+    }
+    
     //MARK: Core Data methods
     func loadData() {
         let request: NSFetchRequest<Items> = Items.fetchRequest()

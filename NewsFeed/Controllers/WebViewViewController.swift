@@ -12,6 +12,9 @@ import UIKit
 class WebViewViewController: UIViewController, WKNavigationDelegate {
     
     var newsUrl = ""
+
+    //TODO: activity indicator is not working
+    @IBOutlet var activityIndicator: UIActivityIndicatorView!
     
     @IBOutlet var webView: WKWebView!
     
@@ -19,6 +22,7 @@ class WebViewViewController: UIViewController, WKNavigationDelegate {
         webView = WKWebView()
         webView.navigationDelegate = self
         view = webView
+
     }
 
     override func viewDidLoad() {
@@ -27,6 +31,19 @@ class WebViewViewController: UIViewController, WKNavigationDelegate {
         guard let url = URL(string: newsUrl) else { return }
         webView.load(URLRequest(url: url))
         webView.allowsBackForwardNavigationGestures = true
+        
+        activityIndicator = UIActivityIndicatorView()
     }
 
+    func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
+        print("Started navigation")
+        self.activityIndicator.startAnimating()
+        self.activityIndicator.color = .systemGray
+    }
+    
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        print("Navigation stopped")
+        activityIndicator.stopAnimating()
+    }
+    
 }

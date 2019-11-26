@@ -87,7 +87,11 @@
                         <viewLayoutGuide key="safeArea" id="zIh-wR-Ct8"/>
                     </view>
                     <navigationItem key="navigationItem" id="6ri-Od-0Md">
-                        <barButtonItem key="leftBarButtonItem" title="Info" image="info.circle" catalog="system" id="gmw-L7-bBG"/>
+                        <barButtonItem key="leftBarButtonItem" title="Info" image="info.circle" catalog="system" id="gmw-L7-bBG">
+                            <connections>
+                                <action selector="infoBarButtonTapped:" destination="uvj-xP-o4K" id="fkK-qj-eoU"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="4SH-kB-qUx">
                             <connections>
                                 <action selector="refreshButtonTapped:" destination="uvj-xP-o4K" id="HSC-Ub-uML"/>
@@ -218,24 +222,34 @@
                                     <wkPreferences key="preferences"/>
                                 </wkWebViewConfiguration>
                             </wkWebView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="ou8-rH-Qse">
+                                <rect key="frame" x="179.5" y="376" width="55" height="56"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="55" id="Vvh-DT-wna"/>
+                                    <constraint firstAttribute="height" constant="56" id="yFm-NG-Nu9"/>
+                                </constraints>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="He2-5Z-3th" firstAttribute="top" secondItem="dmM-cd-7jo" secondAttribute="top" id="638-Wf-c4r"/>
                             <constraint firstAttribute="bottom" secondItem="He2-5Z-3th" secondAttribute="bottom" id="EQi-kW-kN4"/>
                             <constraint firstItem="He2-5Z-3th" firstAttribute="trailing" secondItem="duv-li-IwQ" secondAttribute="trailing" id="WwV-ml-j8F"/>
+                            <constraint firstItem="ou8-rH-Qse" firstAttribute="centerY" secondItem="duv-li-IwQ" secondAttribute="centerY" id="Zer-xs-6I5"/>
+                            <constraint firstItem="ou8-rH-Qse" firstAttribute="centerX" secondItem="duv-li-IwQ" secondAttribute="centerX" id="bxk-qz-Yxg"/>
                             <constraint firstItem="He2-5Z-3th" firstAttribute="leading" secondItem="duv-li-IwQ" secondAttribute="leading" id="h0V-vr-JEa"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="duv-li-IwQ"/>
                     </view>
                     <navigationItem key="navigationItem" id="ztx-B9-q4a"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="ou8-rH-Qse" id="ik2-eV-4XO"/>
                         <outlet property="webView" destination="He2-5Z-3th" id="qJO-Um-m6l"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PuQ-mg-r2T" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2816" y="-279"/>
+            <point key="canvasLocation" x="2815.9420289855075" y="-279.24107142857139"/>
         </scene>
         <!--Headlines-->
         <scene sceneID="mkN-o3-mqE">
@@ -314,7 +328,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="fJF-jT-GAZ">
-                        <barButtonItem key="leftBarButtonItem" title="Info" image="info.circle" catalog="system" id="qMP-pO-kes"/>
+                        <barButtonItem key="leftBarButtonItem" title="Info" image="info.circle" catalog="system" id="qMP-pO-kes">
+                            <connections>
+                                <action selector="infoBarButtonTapped:" destination="fJm-R4-BEc" id="aa9-14-sMp"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W8L-G8-9RS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -327,6 +345,7 @@
                 <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="sog-rH-NuH" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="mw3-VQ-9zu">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
