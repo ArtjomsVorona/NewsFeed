@@ -6,9 +6,13 @@
 //  Copyright © 2019 Artjoms Vorona. All rights reserved.
 //
 
+import CoreData
 import UIKit
 
 class DetailNewsViewController: UIViewController {
+    
+    var savedItems = [Items]()
+    var context: NSManagedObjectContext?
     
     var newsTitle: String = ""
     var newsDescription: String = ""
@@ -22,11 +26,31 @@ class DetailNewsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         updateView()
+        
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        context = appDelegate.persistentContainer.viewContext
     }
     
     //MARK: IBActions
     @IBAction func savedButtonTapped(_ sender: UIButton) {
-        SavedNews.news.insert(News(title: newsTitle, description: newsDescription, url: url, image: newsImage), at: 0)
+        let newItem = Items(context: self.context!)
+        newItem.newsTitle = newsTitle
+        newItem.newsDescription = newsDescription
+        newItem.url = url
+        let imageData: Data = (newsImage?.pngData())!
+        newItem.image = imageData
+        
+        self.savedItems.append(newItem)
+        self.saveData()
+    }
+    
+    //MARK: Core Data method
+    func saveData() {
+        do {
+            try context?.save()
+        } catch {
+            basicAlert(title: "Error!", message: error.localizedDescription)
+        }
     }
     
     func updateView() {

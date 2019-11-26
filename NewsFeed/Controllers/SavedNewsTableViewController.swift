@@ -6,36 +6,66 @@
 //  Copyright © 2019 Artjoms Vorona. All rights reserved.
 //
 
+import CoreData
 import UIKit
 
 class SavedNewsTableViewController: UITableViewController {
+    
+    var savedItems = [Items]()
+    var context: NSManagedObjectContext?
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        context = appDelegate.persistentContainer.viewContext
 
-         self.navigationItem.rightBarButtonItem = self.editButtonItem
+        self.navigationItem.rightBarButtonItem = self.editButtonItem
+        
+        loadData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+        loadData()
+    }
+    
+    //MARK: Core Data methods
+    func loadData() {
+        let request: NSFetchRequest<Items> = Items.fetchRequest()
+        
+        do {
+            savedItems = try (context?.fetch(request))!
+        } catch  {
+            basicAlert(title: "Error!", message: error.localizedDescription)
+        }
+        tableView.reloadData()
+    }
+    
+    func saveData() {
+        do {
+            try context?.save()
+        } catch  {
+            basicAlert(title: "Error!", message: error.localizedDescription)
+        }
         tableView.reloadData()
     }
 
     // MARK: - Table view data source
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return SavedNews.news.count
+        return savedItems.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "SavedNewsCell", for: indexPath) as? NewsTableViewCell else { return UITableViewCell() }
 
-        let item = SavedNews.news[indexPath.row]
+        let item = savedItems[indexPath.row]
         
-        if let image = item.image {
+        if let image = UIImage(data: item.image!) {
             cell.newsImageView.image = image
         }
 
-        cell.newsTitleLabel.text = item.title
+        cell.newsTitleLabel.text = item.newsTitle
         cell.newsTitleLabel.numberOfLines = 0
 
         return cell
@@ -47,8 +77,10 @@ class SavedNewsTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            SavedNews.news.remove(at: indexPath.row)
-            tableView.reloadData()
+            let item = self.savedItems[indexPath.row]
+            self.savedItems.remove(at: indexPath.row)
+            self.context?.delete(item)
+            self.saveData()
         }
     }
     
@@ -58,7 +90,7 @@ class SavedNewsTableViewController: UITableViewController {
         
         guard let webViewVC = storyboard.instantiateViewController(withIdentifier: "WebViewSBID") as? WebViewViewController else { return }
         
-        webViewVC.newsUrl = SavedNews.news[indexPath.row].url
+        webViewVC.newsUrl = savedItems[indexPath.row].url!
         present(webViewVC, animated: true, completion: nil)
     }
    

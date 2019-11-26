@@ -6,9 +6,10 @@
 //  Copyright © 2019 Artjoms Vorona. All rights reserved.
 //
 
-import Foundation
+import CoreData
+import UIKit
 
 class SavedNews {
     
-    static var news = [News]()
+    static var news = [Items]()
 }
